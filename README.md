@@ -48,9 +48,9 @@ let hotwordDetector = new HotwordDetector(modelData, detectorData, recordingProg
 
 ### Methods
 ```javascript
-// Creates the detector and starts the detection process.
+// Creates the detector and starts the recording process.
 hotwordDetector.Start();
-// Stops the detection process and removes the detector.
+// Stops the detection process and removes the recording process.
 hotwordDetector.Stop();
 // Stops the detection process.
 hotwordDetector.Pause();
@@ -85,6 +85,7 @@ hotwordDetector.on('sound', function(buffer) {
 ### Example
 ```javascript
 // Only available for MacOS(darwin) and various Linux distro's.
+const os = require('os');
 if (['darwin', 'linux'].indexOf(os.platform()) > -1) {
   // Imports module.
   const HotwordDetector = require('node-hotworddetector');
