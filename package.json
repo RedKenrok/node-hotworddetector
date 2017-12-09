@@ -15,7 +15,7 @@
 	"license": "MIT",
 	"main": "index.js",
 	"dependencies": {
-		"node-audiorecording": " 0.0.x"
+		"node-audiorecorder": " 0.0.1"
 	},
 	"devDependencies": {}
 }
