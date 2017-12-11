@@ -1,7 +1,8 @@
 'use strict';
 
 // Event module.
-const events = require('events');
+const events = require('events'),
+	fs = require('fs');
 // Audio recorder.
 const AudioRecorder = require('node-audiorecorder');
 // Snowboy, hot word detection.
@@ -13,6 +14,9 @@ const defaultModel = {
 };
 const defaultDetector = {
 	resource: './node_modules/snowboy/resources/common.res'
+};
+const defaultRecorder = {
+	threshold: 0
 };
 
 let audioRecorder,
@@ -33,10 +37,7 @@ let setupDetector = function(instance) {
 	detector = new Detector(detectorOptions);
 	// Give through the error event.
 	detector.on('error', function() {
-		let error = 'HotwordDetector: Detector error.';
-		if (instance.logger) {
-			instance.logger.warn(error);
-		}
+		let error = 'HotwordDetector detector error.';
 		instance.emit('error', error);
 	});
 	// Give through the hotword event.
@@ -59,13 +60,13 @@ let setupDetector = function(instance) {
 class HotwordDetector extends events.EventEmitter {
 	/**
 	 * Constructor of HotwordDetector class.
-	 * @param {*} modelData Array of model data
 	 * @param {*} detectorData Detector data
-	 * @param {string} recordingProgram Program to be used to record the audio
+	 * @param {*} modelData Array of model data
+	 * @param {*} recorderData Recorder data
 	 * @param {*} logger Object with log, warn, and error functions
 	 * @returns this
 	 */
-	constructor(modelData, detectorData, recordingProgram, logger) {
+	constructor(detectorData, modelData, recorderData, logger) {
 		super();
 		
 		// Store logger.
@@ -77,19 +78,23 @@ class HotwordDetector extends events.EventEmitter {
 		if (!modelData || modelData.length < 1) {
 			modelData = [ defaultModel ];
 		}
+		let model;
 		for (let i = 0; i < modelData.length; i++) {
-			models.add(Object.assign(defaultModel, modelData[i]));
+			model = Object.assign(defaultModel, modelData[i]);
+			// Check if model file is present.
+			if (fs.existsSync(model.file)) {
+				models.add(model);
+			}
+			else {
+				this.logger.warn('Model file not found: ' + model.file);
+			}
 		}
 		
 		// Store detector options.
 		detectorOptions = Object.assign(defaultDetector, detectorData, { models: models });
 		
 		// Audio recorder instance.
-		audioRecorder = new AudioRecorder({
-			program: recordingProgram || 'rec',
-			sampleRate: 16000,
-			threshold: 0
-		}, this.logger);
+		audioRecorder = new AudioRecorder(Object.assign(defaultRecorder, recorderData), this.logger);
 		
 		if (this.logger) {
 			// Log successful initialization.
