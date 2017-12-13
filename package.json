@@ -1,7 +1,7 @@
 {
 	"name": "node-hotworddetector",
 	"productName": "Hotword detector",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"description": "Hotword detector for Node.js using Snowboy by Kitt.ai.",
 	"keywords": [
 		"hot",
