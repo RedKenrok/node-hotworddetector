@@ -1,5 +1,5 @@
 # Hotword detector
-Hotword detector for [Node.js](https://nodejs.org/) using [Snowboy](https://snowboy.kitt.ai/) by [Kitt.ai](https://kitt.ai/). Snowboy is an offline neural network driven hotword detection library, with compatibility only on MacOS and most Linux distro's. This module aims to simplify and improve the standard [snowboy module](https://github.com/Kitt-AI/snowboy) by turning it into one single interface with build-in microphone recording and by adding start, stop, pause, and resume functionality.
+Hotword detector for [Node.js](https://nodejs.org/) using [Snowboy](https://snowboy.kitt.ai/) by [Kitt.ai](https://kitt.ai/). Snowboy is an offline neural network driven hotword detection library, with compatibility only on MacOS (darwin) and most Linux distro's. This module aims to simplify and improve the standard [snowboy module](https://github.com/Kitt-AI/snowboy) by turning it into one single interface with build-in microphone recording and by adding start, stop, pause, and resume functionality.
 
 ## Installation
 ```
@@ -111,4 +111,4 @@ if (['darwin', 'linux'].indexOf(os.platform()) > -1) {
 }
 ```
 
-> For another example see the [Electron-VoiceInterfacePrototype](https://github.com/RedKenrok/Electron-VoiceInterfacePrototype) repository.
+> For another example see the [Electron-VoiceInterfacePrototype](https://github.com/RedKenrok/Electron-VoiceInterfacePrototype)'s input.js.
