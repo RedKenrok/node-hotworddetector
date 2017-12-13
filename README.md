@@ -110,3 +110,5 @@ if (['darwin', 'linux'].indexOf(os.platform()) > -1) {
   hotwordDetector.start();
 }
 ```
+
+> For another example see the [Electron-VoiceInterfacePrototype](https://github.com/RedKenrok/Electron-VoiceInterfacePrototype) repository.
