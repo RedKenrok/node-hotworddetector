@@ -2,7 +2,7 @@
 
 // Event module.
 const events = require('events'),
-	fs = require('fs');
+	  fs = require('fs');
 // Audio recorder.
 const AudioRecorder = require('node-audiorecorder');
 // Snowboy, hot word detection.
@@ -96,8 +96,8 @@ class HotwordDetector extends events.EventEmitter {
 		// Audio recorder instance.
 		audioRecorder = new AudioRecorder(Object.assign(defaultRecorder, recorderData), this.logger);
 		
+		// Log successful initialization.
 		if (this.logger) {
-			// Log successful initialization.
 			logger.log('HotwordDetector initialized.');	
 		}
 		
