@@ -1,7 +1,7 @@
 {
 	"name": "node-hotworddetector",
 	"productName": "Hotword detector",
-	"version": "0.0.6",
+	"version": "1.0.0",
 	"description": "Hotword detector for Node.js using Snowboy by Kitt.ai.",
 	"keywords": [
 		"hot",
@@ -14,13 +14,13 @@
 	"repository": "https://github.com/RedKenrok/node-hotworddetector",
 	"license": "MIT",
 	"main": "index.js",
-	"os" : [
+	"os": [
 		"darwin",
 		"linux"
 	],
 	"dependencies": {
 		"nan": "^2.8.0",
-		"node-audiorecorder": "^0.0.3",
+		"node-audiorecorder": "^1.0.0",
 		"snowboy": "^1.2.0"
 	},
 	"devDependencies": {}

@@ -31,10 +31,9 @@ const modelData = [
 const detectorData = {
   resource: './node_modules/snowboy/resources/common.res'
 };
-// Optional parameter to select the recording program, default is 'rec'.
-// The recording program to be used, either 'arecord', 'rec', or 'sox'.
+// Optional parameter to select the recording options.
 // See the 'node-audiorecording' module for more information.
-const recordingProgram = 'rec';
+const recorderData = {};
 // Optional parameter intended for debugging.
 // The object has to implement a log and warn function.
 const logger = {
@@ -43,8 +42,10 @@ const logger = {
 };
 
 // Create an instance.
-let hotwordDetector = new HotwordDetector(modelData, detectorData, recordingProgram, logger);
+let hotwordDetector = new HotwordDetector(modelData, detectorData, recorderData, logger);
 ```
+
+> More information about [audio recording options](https://github.com/RedKenrok/node-audiorecorder#constructor).
 
 ### Methods
 ```javascript
