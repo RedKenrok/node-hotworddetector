@@ -108,6 +108,9 @@ class HotwordDetector extends events.EventEmitter {
 	 * @returns this
 	 */
 	start() {
+		if (detector) {
+			detector.removeAllListeners();
+		}
 		setupDetector(this);
 		audioRecorder.start().stream().pipe(detector);
 		
@@ -122,37 +125,11 @@ class HotwordDetector extends events.EventEmitter {
 	 * @returns this
 	 */
 	stop() {
-		audioRecorder.stop().stream().unpipe(detector);
+		detector.removeAllListeners();
+		detector = null;
 		
 		if (this.logger) {
 			this.logger.log('HotwordDetector: Stopped detecting.');
-		}
-		
-		return this;
-	}
-	/**
-	 * Pauses detection.
-	 * @returns this
-	 */
-	pause() {
-		audioRecorder.pause().stream().unpipe(detector);
-		
-		if (this.logger) {
-			this.logger.log('HotwordDetector: Paused detecting.');
-		}
-		
-		return this;
-	}
-	/**
-	 * Resumes detection.
-	 * @returns this
-	 */
-	resume() {
-		setupDetector(this);
-		audioRecorder.resume().stream().pipe(detector);
-		
-		if (this.logger) {
-			this.logger.log('HotwordDetector: Resumed detecting.');
 		}
 		
 		return this;
