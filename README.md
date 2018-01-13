@@ -112,4 +112,4 @@ if (['darwin', 'linux'].indexOf(os.platform()) > -1) {
 }
 ```
 
-> For another example see the [Electron-VoiceInterfacePrototype](https://github.com/RedKenrok/Electron-VoiceInterfacePrototype)'s input.js.
+> For another example see the [Electron-VoiceInterfaceBoilerplate](https://github.com/RedKenrok/Electron-VoiceInterfaceBoilerplate)'s input.js.
