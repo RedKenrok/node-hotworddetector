@@ -108,9 +108,6 @@ class HotwordDetector extends events.EventEmitter {
 	 * @returns this
 	 */
 	start() {
-		if (detector) {
-			detector.removeAllListeners();
-		}
 		setupDetector(this);
 		audioRecorder.start().stream().pipe(detector);
 		
@@ -125,7 +122,6 @@ class HotwordDetector extends events.EventEmitter {
 	 * @returns this
 	 */
 	stop() {
-		detector.removeAllListeners();
 		detector = null;
 		
 		if (this.logger) {
