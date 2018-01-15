@@ -9,7 +9,7 @@ npm install --save node-hotworddetector
 ## Dependencies
 This module uses snowboy, therefore it requires a some resources before hand please see the [official website](https://snowboy.kitt.ai/) for these resources.
 
-The module also uses the [node-audiorecording](https://github.com/RedKenrok/node-audiorecording) module. It requires you to have [SoX](http://sox.sourceforge.net/) installed and it must be available in your $PATH. For more information see the [node-audiorecording](https://github.com/RedKenrok/node-audiorecording) module.
+The module also uses the [node-audiorecorder](https://github.com/RedKenrok/node-audiorecorder) module. It requires you to have [SoX](http://sox.sourceforge.net/) installed and it must be available in your $PATH. For more information see the [node-audiorecorder](https://github.com/RedKenrok/node-audiorecorder) module.
 
 ## Usage
 
@@ -32,7 +32,7 @@ const detectorData = {
   resource: './node_modules/snowboy/resources/common.res'
 };
 // Optional parameter to select the recording options.
-// See the 'node-audiorecording' module for more information.
+// See the 'node-audiorecorder' module for more information.
 const recorderData = {};
 // Optional parameter intended for debugging.
 // The object has to implement a log and warn function.
@@ -45,7 +45,7 @@ const logger = {
 let hotwordDetector = new HotwordDetector(modelData, detectorData, recorderData, logger);
 ```
 
-> More information about [audio recording options](https://github.com/RedKenrok/node-audiorecorder#constructor).
+> More information about [audio recorder options](https://github.com/RedKenrok/node-audiorecorder#constructor).
 
 ### Methods
 ```javascript
