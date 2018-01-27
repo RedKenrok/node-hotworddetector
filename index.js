@@ -85,7 +85,7 @@ class HotwordDetector extends events.EventEmitter {
 			if (fs.existsSync(model.file)) {
 				models.add(model);
 			}
-			else {
+			else if (this.logger) {
 				this.logger.warn('Model file not found: ' + model.file);
 			}
 		}
