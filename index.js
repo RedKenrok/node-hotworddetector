@@ -78,8 +78,9 @@ class HotwordDetector extends events.EventEmitter {
 		if (!modelData || modelData.length < 1) {
 			modelData = [ defaultModel ];
 		}
+		let model;
 		for (let i = 0; i < modelData.length; i++) {
-			let model = Object.assign(defaultModel, modelData[i]);
+			model = modelData[i];
 			// Check if model file is present.
 			if (fs.existsSync(model.file)) {
 				models.add(model);
