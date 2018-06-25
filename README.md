@@ -93,12 +93,12 @@ if (['darwin', 'linux'].indexOf(os.platform()) > -1) {
   // Initialize detector.
   const hotwordDetector = new HotwordDetector([
     {
-      file: './relative/path/to/model.umdl',
+      file: './node_modules/snowboy/resources/models/snowboy.umdl',
       hotwords : 'model',
       sensitivity: '0.5',
     }
   ], {
-    resource: './relative/path/to/common.res',
+    resource: './node_modules/snowboy/resources/common.res',
     audioGain: 2
   }, console);
   
