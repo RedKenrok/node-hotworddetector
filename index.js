@@ -9,7 +9,7 @@ const AudioRecorder = require('node-audiorecorder');
 const { Models, Detector } = require('snowboy');
 
 const defaultModel = {
-	file: './node_modules/snowboy/resources/snowboy.umdl',
+	file: './node_modules/snowboy/resources/models/snowboy.umdl',
 	hotwords : 'snowboy',
 	sensitivity: 0.5
 };
