@@ -10,10 +10,11 @@ const { Models, Detector } = require('snowboy');
 
 const defaultModel = {
 	file: './node_modules/snowboy/resources/snowboy.umdl',
-	hotwords : 'snowboy'
+	hotwords : 'snowboy',
+	sensitivity: 0.5
 };
 const defaultDetector = {
-	resource: './node_modules/snowboy/resources/common.res'
+	resource: './node_modules/snowboy/resources/common.res',
 };
 const defaultRecorder = {
 	threshold: 0
@@ -37,8 +38,10 @@ let setupDetector = function(instance) {
 	detector = new Detector(detectorOptions);
 	// Give through the error event.
 	detector.on('error', function() {
-		let error = 'HotwordDetector detector error.';
-		instance.emit('error', error);
+		if (instance.logger) {
+			instance.logger.warn('HotwordDetector; detection error.');
+		}
+		instance.emit('error', 'HotwordDetector detector error.');
 	});
 	// Give through the hotword event.
 	detector.on('hotword', function(index, hotword, buffer) {
@@ -123,6 +126,9 @@ class HotwordDetector extends events.EventEmitter {
 	 */
 	stop() {
 		detector = null;
+		if (audioRecorder) {
+			audioRecorder.stream().unpipe(detector);
+		}
 		
 		if (this.logger) {
 			this.logger.log('HotwordDetector: Stopped detecting.');

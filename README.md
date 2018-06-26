@@ -18,31 +18,31 @@ The module also uses the [node-audiorecorder](https://github.com/RedKenrok/node-
 // Import module.
 const HotwordDetector = require('node-hotworddetector');
 
-// Array of data for each hotword model.
-// See the 'snowboy' module for more information.
-const modelData = [
-  {
-    file: './node_modules/snowboy/resources/snowboy.umdl',
-    hotwords : 'snowboy'
-  }
-];
 // Detector data.
 // See the 'snowboy' module for more information.
 const detectorData = {
   resource: './node_modules/snowboy/resources/common.res'
 };
+// Array of data for each hotword model.
+// See the 'snowboy' module for more information.
+const modelData = [
+  {
+    file: './node_modules/snowboy/resources/snowboy.umdl',
+    hotwords : 'snowboy',
+    sensitivity: '0.5'
+  }
+];
 // Optional parameter to select the recording options.
 // See the 'node-audiorecorder' module for more information.
-const recorderData = {};
+const recorderData = {
+  audioGain: 2;
+};
 // Optional parameter intended for debugging.
 // The object has to implement a log and warn function.
-const logger = {
-  log: console.log,
-  warn: console.warn
-};
+const logger = console;
 
 // Create an instance.
-let hotwordDetector = new HotwordDetector(modelData, detectorData, recorderData, logger);
+let hotwordDetector = new HotwordDetector(detectorData, modelData, recorderData, logger);
 ```
 
 > More information about [audio recorder options](https://github.com/RedKenrok/node-audiorecorder#constructor).
@@ -53,10 +53,6 @@ let hotwordDetector = new HotwordDetector(modelData, detectorData, recorderData,
 hotwordDetector.Start();
 // Stops the detection process and removes the recording process.
 hotwordDetector.Stop();
-// Stops the detection process.
-hotwordDetector.Pause();
-// Starts the detection process.
-hotwordDetector.Resume();
 ```
 
 ### Events
@@ -83,33 +79,5 @@ hotwordDetector.on('sound', function(buffer) {
 });
 ```
 
-### Example
-```javascript
-// Only available for MacOS(darwin) and various Linux distro's.
-const os = require('os');
-if (['darwin', 'linux'].indexOf(os.platform()) > -1) {
-  // Imports module.
-  const HotwordDetector = require('node-hotworddetector');
-  // Initialize detector.
-  const hotwordDetector = new HotwordDetector([
-    {
-      file: './relative/path/to/model.umdl',
-      hotwords : 'model',
-      sensitivity: '0.5',
-    }
-  ], {
-    resource: './relative/path/to/common.res',
-    audioGain: 2
-  }, console);
-  
-  // Listen to 'hotword' event.
-  hotwordDetector.on('hotword', function(index, hotword, buffer) {
-	// Do something...
-  });
-  
-  // Start recording and detecting.
-  hotwordDetector.start();
-}
-```
-
-> For another example see the [Electron-VoiceInterfaceBoilerplate](https://github.com/RedKenrok/Electron-VoiceInterfaceBoilerplate)'s input.js.
+### Examples
+See or run the [example.js](https://github.com/RedKenrok/node-hotworddetector/blob/master/example.js) script to see or test it for yourself. For another example see the [Electron-VoiceInterfaceBoilerplate](https://github.com/RedKenrok/Electron-VoiceInterfaceBoilerplate)'s input.js.
