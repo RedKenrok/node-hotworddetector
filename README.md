@@ -80,5 +80,5 @@ hotwordDetector.on('sound', function(buffer) {
 ```
 
 ### Examples
-See or run the [example.js](https://github.com/RedKenrok/node-hotworddetector/blob/master/example.js) script to see or test it for yourself. If you want to use that code directly in your project DO NOT forget to update the ``require(./index.js)`` to ``require(node-hotworddetector)``.
+See or run the [example.js](https://github.com/RedKenrok/node-hotworddetector/blob/master/example.js) script to see or test it for yourself. If you want to use that code directly in your project DO update the ``require(./index.js)`` to ``require(node-hotworddetector)``.
 > For another example see the [Electron-VoiceInterfaceBoilerplate](https://github.com/RedKenrok/Electron-VoiceInterfaceBoilerplate)'s input.js.
