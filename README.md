@@ -79,7 +79,38 @@ hotwordDetector.on('sound', function(buffer) {
 });
 ```
 
+<<<<<<< HEAD
 ### Examples
 See or run the [example.js](https://github.com/RedKenrok/node-hotworddetector/blob/master/example.js) script to see or test it for yourself. If you want to use that code directly in your project DO update the ``require(./index.js)`` to ``require(node-hotworddetector)``.
+=======
+### Example
+```javascript
+// Only available for MacOS(darwin) and various Linux distro's.
+const os = require('os');
+if (['darwin', 'linux'].indexOf(os.platform()) > -1) {
+  // Imports module.
+  const HotwordDetector = require('node-hotworddetector');
+  // Initialize detector.
+  const hotwordDetector = new HotwordDetector([
+    {
+      file: './node_modules/snowboy/resources/models/snowboy.umdl',
+      hotwords : 'model',
+      sensitivity: '0.5',
+    }
+  ], {
+    resource: './node_modules/snowboy/resources/common.res',
+    audioGain: 2
+  }, console);
+  
+  // Listen to 'hotword' event.
+  hotwordDetector.on('hotword', function(index, hotword, buffer) {
+	// Do something...
+  });
+  
+  // Start recording and detecting.
+  hotwordDetector.start();
+}
+```
+>>>>>>> 6da53000193a3ef2cb5edfde4c7502eb80f9a5ee
 
 > For another example see the [Electron-VoiceInterfaceBoilerplate](https://github.com/RedKenrok/Electron-VoiceInterfaceBoilerplate)'s input.js.
