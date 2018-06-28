@@ -4,12 +4,11 @@ if (['darwin', 'linux'].indexOf(os.platform()) > -1) {
 	// Imports module.
 	const HotwordDetector = require('./index.js');
 	// Initialize detector.
-<<<<<<< HEAD
 	const hotwordDetector = new HotwordDetector({
 		resource: './node_modules/snowboy/resources/common.res'
 	}, [
 		{
-			file: './node_modules/snowboy/resources/snowboy.umdl',
+			file: './node_modules/snowboy/resources/models/snowboy.umdl',
 			hotwords : 'snowboy',
 			sensitivity: '0.5'
 		}
@@ -35,29 +34,10 @@ if (['darwin', 'linux'].indexOf(os.platform()) > -1) {
 	// Triggered when there is no audible sound being recorded.
 	hotwordDetector.on('silence', function() {
 		console.log('hotwordDetector: silence');
-=======
-	const hotwordDetector = new HotwordDetector([
-		{
-			file: './node_modules/snowboy/resources/models/snowboy.umdl',
-			hotwords : 'model',
-			sensitivity: '0.5',
-		}
-	], {
-		resource: './node_modules/snowboy/resources/common.res',
-		audioGain: 2
-	}, console);
-	
-	// Listen to 'hotword' event.
-	hotwordDetector.on('hotword', function(index, hotword, buffer) {
-		// Do something...
->>>>>>> 6da53000193a3ef2cb5edfde4c7502eb80f9a5ee
 	});
 	
 	// Start recording and detecting.
 	hotwordDetector.start();
-<<<<<<< HEAD
 } else {
-	console.warn("The operating system does not meet the requirements to run the hotword detection library.");
-=======
->>>>>>> 6da53000193a3ef2cb5edfde4c7502eb80f9a5ee
+	console.warn("The operating system does not meet the requirements to run the hotword detection library.");c7502eb80f9a5ee
 }

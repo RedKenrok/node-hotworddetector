@@ -10,12 +10,8 @@ const { Models, Detector } = require('snowboy');
 
 const defaultModel = {
 	file: './node_modules/snowboy/resources/models/snowboy.umdl',
-<<<<<<< HEAD
 	hotwords : 'snowboy',
 	sensitivity: 0.5
-=======
-	hotwords : 'snowboy'
->>>>>>> 6da53000193a3ef2cb5edfde4c7502eb80f9a5ee
 };
 const defaultDetector = {
 	resource: './node_modules/snowboy/resources/common.res',
