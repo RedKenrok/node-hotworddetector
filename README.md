@@ -1,4 +1,4 @@
-> UNMAINTAINED: This project will no be updated in the future. I do not have a device set up to test and run the program on as well as the need for it to exist now or in the future.
+> UNMAINTAINED: This project will not be updated in the future. I do not have a device set up to test and run the program on as well as the need for it to exist now or in the future.
 
 # Hotword detector
 Hotword detector for [Node.js](https://nodejs.org/) using [Snowboy](https://snowboy.kitt.ai/) by [Kitt.ai](https://kitt.ai/). Snowboy is an offline neural network driven hotword detection library, with compatibility only on MacOS (darwin) and most Linux distro's. This module aims to simplify and improve the standard [snowboy module](https://github.com/Kitt-AI/snowboy) by turning it into one single interface with build-in microphone recording and by adding start, stop, pause, and resume functionality.
