@@ -5,7 +5,7 @@ Hotword detector for [Node.js](https://nodejs.org/) using [Snowboy](https://snow
 
 ## Installation
 ```
-npm install --save node-hotworddetector
+npm i --save node-hotworddetector
 ```
 
 ## Dependencies
@@ -82,6 +82,6 @@ hotwordDetector.on('sound', function(buffer) {
 ```
 
 ### Examples
-See or run the [example.js](https://github.com/RedKenrok/node-hotworddetector/blob/master/example.js) script to see or test it for yourself. If you want to use that code directly in your project DO update the ``require(./index.js)`` to ``require(node-hotworddetector)``.
+See the [examples directory](https://github.com/RedKenrok/node-hotworddetector/tree/master/examples). If you want to use that code directly in your project DO update the `require(../library)` to `require(node-hotworddetector)`.
 
 > For another example see the [Electron-VoiceInterfaceBoilerplate](https://github.com/RedKenrok/Electron-VoiceInterfaceBoilerplate)'s input.js.

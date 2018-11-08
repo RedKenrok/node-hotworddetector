@@ -1,20 +1,17 @@
-'use strict';
-
-// Event module.
-const events = require('events'),
-	  fs = require('fs');
-// Audio recorder.
-const AudioRecorder = require('node-audiorecorder');
-// Snowboy, hot word detection.
-const { Models, Detector } = require('snowboy');
+// Node modules.
+const events = require(`events`),
+	fs = require(`fs`);
+// Dependencies.
+const AudioRecorder = require(`node-audiorecorder`);
+const { Models, Detector } = require(`snowboy`);
 
 const defaultModel = {
-	file: './node_modules/snowboy/resources/models/snowboy.umdl',
-	hotwords : 'snowboy',
+	file: `./node_modules/snowboy/resources/snowboy.umdl`,
+	hotwords : `snowboy`,
 	sensitivity: 0.5
 };
 const defaultDetector = {
-	resource: './node_modules/snowboy/resources/common.res',
+	resource: `./node_modules/snowboy/resources/common.res`,
 };
 const defaultRecorder = {
 	threshold: 0
@@ -29,7 +26,7 @@ let audioRecorder,
  * Sets up new detector instance.
  * It has to be recreated each time the detection is started or resumed as the detectors stream will close automaticly when nothing is piped to the service.
  */
-let setupDetector = function(instance) {
+const setupDetector = function(instance) {
 	if (detector) {
 		detector.reset();
 	}
@@ -37,28 +34,28 @@ let setupDetector = function(instance) {
 	// Create snowboy detector.
 	detector = new Detector(detectorOptions);
 	// Give through the error event.
-	detector.on('error', function() {
+	detector.on(`error`, function() {
 		if (instance.logger) {
-			instance.logger.warn('HotwordDetector; detection error.');
+			instance.logger.warn(`HotwordDetector; detection error.`);
 		}
-		instance.emit('error', 'HotwordDetector detector error.');
+		instance.emit(`error`, `HotwordDetector detector error.`);
 	});
 	// Give through the hotword event.
-	detector.on('hotword', function(index, hotword, buffer) {
+	detector.on(`hotword`, function(index, hotword, buffer) {
 		if (instance.logger) {
-			instance.logger.log('HotwordDetector; hotword detected; index: ' + index + '; hotword: ' + hotword + '.');
+			instance.logger.log(`HotwordDetector; hotword detected; index: ` + index + `; hotword: ` + hotword + `.`);
 		}
-		instance.emit('hotword', index, hotword, buffer);
+		instance.emit(`hotword`, index, hotword, buffer);
 	});
 	// Give through the silence event.
-	detector.on('silence', function() {
-		instance.emit('silence');
+	detector.on(`silence`, function() {
+		instance.emit(`silence`);
 	});
 	// Give through the sound event.
-	detector.on('sound', function(buffer) {
-		instance.emit('sound', buffer);
+	detector.on(`sound`, function(buffer) {
+		instance.emit(`sound`, buffer);
 	});
-}
+};
 
 class HotwordDetector extends events.EventEmitter {
 	/**
@@ -89,7 +86,7 @@ class HotwordDetector extends events.EventEmitter {
 				models.add(model);
 			}
 			else if (this.logger) {
-				this.logger.warn('Model file not found: ' + model.file);
+				this.logger.warn(`Model file not found: ` + model.file);
 			}
 		}
 		
@@ -101,7 +98,7 @@ class HotwordDetector extends events.EventEmitter {
 		
 		// Log successful initialization.
 		if (this.logger) {
-			logger.log('HotwordDetector initialized.');	
+			logger.log(`HotwordDetector initialized.`);	
 		}
 		
 		return this;
@@ -115,7 +112,7 @@ class HotwordDetector extends events.EventEmitter {
 		audioRecorder.start().stream().pipe(detector);
 		
 		if (this.logger) {
-			this.logger.log('HotwordDetector: Started detecting.');
+			this.logger.log(`HotwordDetector: Started detecting.`);
 		}
 		
 		return this;
@@ -131,7 +128,7 @@ class HotwordDetector extends events.EventEmitter {
 		}
 		
 		if (this.logger) {
-			this.logger.log('HotwordDetector: Stopped detecting.');
+			this.logger.log(`HotwordDetector: Stopped detecting.`);
 		}
 		
 		return this;
