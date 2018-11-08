@@ -8,7 +8,7 @@ if (['darwin', 'linux'].indexOf(os.platform()) > -1) {
 		resource: './node_modules/snowboy/resources/common.res'
 	}, [
 		{
-			file: './node_modules/snowboy/resources/snowboy.umdl',
+			file: './node_modules/snowboy/resources/models/snowboy.umdl',
 			hotwords : 'snowboy',
 			sensitivity: '0.5'
 		}
@@ -39,5 +39,5 @@ if (['darwin', 'linux'].indexOf(os.platform()) > -1) {
 	// Start recording and detecting.
 	hotwordDetector.start();
 } else {
-	console.warn("The operating system does not meet the requirements to run the hotword detection library.");
+	console.warn("The operating system does not meet the requirements to run the hotword detection library.");c7502eb80f9a5ee
 }
