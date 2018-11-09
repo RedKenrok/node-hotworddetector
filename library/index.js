@@ -14,7 +14,7 @@ const defaultDetector = {
 	resource: `./node_modules/snowboy/resources/common.res`,
 };
 const defaultRecorder = {
-	threshold: 0
+	silence: 0
 };
 
 let audioRecorder,
@@ -24,7 +24,7 @@ let audioRecorder,
 
 /**
  * Sets up new detector instance.
- * It has to be recreated each time the detection is started or resumed as the detectors stream will close automaticly when nothing is piped to the service.
+ * It has to be recreated each time the detection is started or resumed as the detectors stream will close automatically when nothing is piped to the service.
  */
 const setupDetector = function(instance) {
 	if (detector) {
@@ -35,15 +35,16 @@ const setupDetector = function(instance) {
 	detector = new Detector(detectorOptions);
 	// Give through the error event.
 	detector.on(`error`, function() {
+		const message = `HotwordDetector: detection error.`;
 		if (instance.logger) {
-			instance.logger.warn(`HotwordDetector; detection error.`);
+			instance.logger.warn(message);
 		}
-		instance.emit(`error`, `HotwordDetector detector error.`);
+		instance.emit(`error`, message);
 	});
 	// Give through the hotword event.
 	detector.on(`hotword`, function(index, hotword, buffer) {
 		if (instance.logger) {
-			instance.logger.log(`HotwordDetector; hotword detected; index: ` + index + `; hotword: ` + hotword + `.`);
+			instance.logger.log(`HotwordDetector: hotword detected, index: '${index}', hotword: '${hotword}'.`);
 		}
 		instance.emit(`hotword`, index, hotword, buffer);
 	});
@@ -86,7 +87,7 @@ class HotwordDetector extends events.EventEmitter {
 				models.add(model);
 			}
 			else if (this.logger) {
-				this.logger.warn(`Model file not found: ` + model.file);
+				this.logger.warn(`HotwordDetector: Model file not found '${model.file}'.`);
 			}
 		}
 		
@@ -98,7 +99,7 @@ class HotwordDetector extends events.EventEmitter {
 		
 		// Log successful initialization.
 		if (this.logger) {
-			logger.log(`HotwordDetector initialized.`);	
+			logger.log(`HotwordDetector: Initialized.`);	
 		}
 		
 		return this;
