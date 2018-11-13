@@ -1,9 +1,10 @@
-// Requires the node-audiorecorder and @google-cloud/speech modules to be installed.
+// Requires the node-audiorecorder module to be installed.
 
+// Node modules.
+const fs = require(`fs`);
 // Dependency modules.
 const AudioRecorder = require(`node-audiorecorder`),
 	HotwordDetector = require(`../library`);
-const GoogleSpeech = require(`@google-cloud/speech`);
 
 // Options audio recorder.
 const recorderOptions = {};
@@ -18,18 +19,6 @@ const modelData = [{
 }];
 const recorderData = {
 	audioGain: 2
-};
-// Options Google-Cloud Speech API.
-const speech = new GoogleSpeech.SpeechClient({
-	keyFilename: `KEYPATH_GOOGLECLOUD`
-}); // TODO: Add path to file.
-const speechRequest = {
-	config: {
-		encoding: `LINEAR16`,
-		sampleRateHertz: 16000,
-		languageCode: `en-GB`
-	},
-	interimResults: false
 };
 
 // Initialize hotword detector.
@@ -63,12 +52,8 @@ hotwordDetector.on(`hotword`, function(index, hotword, buffer) {
 		process.exit(1);
 	});
 	
-	// Start Google-Cloud Speech API web stream.
-	let stream = speech.streamingRecognize(speechRequest)
-		.on(`error`, console.error)
-		.on(`data`, function(data) {
-			console.log(`Transcript: '${data.results[0].alternatives[0].transcript}'.`);
-		});
+	// Start file stream.
+	let stream = fs.createWriteStream(`recording-${new Date().getTime()}.wav`, { encoding: `binary` });
 	
 	// Start streaming audio to stream.
 	audioRecorder.stream().pipe(stream);
